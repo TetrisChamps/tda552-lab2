@@ -1,1 +1,1 @@
-# tda522-lab1
+# tda522-lab2
