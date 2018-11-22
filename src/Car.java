@@ -3,16 +3,10 @@ import java.awt.*;
 /**
  * A representation of an abstract car that is movable.
  */
-public abstract class Car implements Movable {
+public abstract class Car extends Vehicle {
 
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private final String modelName; // The car model name
-    private int rotation; // The rotation of the car in degrees
-    private double xCoordinate = 0;
-    private double yCoordinate = 0;
     private boolean engineOn = false;
 
     /**
@@ -24,49 +18,18 @@ public abstract class Car implements Movable {
      * @param modelName   The model of the car, the cars model.
      */
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
+        super(color, modelName);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.color = color;
-        this.modelName = modelName;
         stopEngine();
-    }
-
-    private int rotate(int angle) {
-        int rotation = (this.rotation + angle) % 360;
-        return (rotation > 0) ? rotation : 360 + rotation;
     }
 
     public int getNrDoors() {
         return nrDoors;
     }
 
-
     public double getEnginePower() {
         return enginePower;
-    }
-
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color clr) {
-        color = clr;
-    }
-
-    public int getRotation() {
-        return rotation;
-    }
-
-    public double getXCoordinate() {
-        return xCoordinate;
-    }
-
-    public double getYCoordinate() {
-        return yCoordinate;
     }
 
     public boolean getEngineOn() {
@@ -74,14 +37,14 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Sets the car speed to 0.1
+     * Turns on the engine
      */
     public void startEngine() {
         engineOn = true;
     }
 
     /**
-     * Sets the Car speed to 0
+     * Turns off the engine
      */
     private void stopEngine() {
         engineOn = false;
@@ -92,18 +55,23 @@ public abstract class Car implements Movable {
      *
      * @return Max speed change
      */
-    public abstract double speedFactor();
+    public double speedFactor() {
+        return 1.0;
+    }
 
-    private void incrementSpeed(double amount) {
+    private void increaseSpeed(double amount) {
         if (engineOn) {
-            double newSpeed = getCurrentSpeed() + speedFactor() * amount;
-            currentSpeed = getEnginePower() >= newSpeed ? newSpeed : getEnginePower();
+            movable.increaseSpeed(speedFactor() * amount);
+            super.increaseSpeed(speedFactor() * amount);
+            if (getSpeed() > getEnginePower()) {
+                super.decreaseSpeed(getSpeed() - getEnginePower());
+            }
         }
     }
 
-    private void decrementSpeed(double amount) {
-        double newSpeed = getCurrentSpeed() - speedFactor() * amount;
-        currentSpeed = newSpeed > 0 ? newSpeed : 0;
+    private void decreaseSpeed(double amount) {
+        movable.decreaseSpeed(speedFactor() * amount);
+        super.decreaseSpeed(speedFactor() * amount);
     }
 
     /**
@@ -111,9 +79,8 @@ public abstract class Car implements Movable {
      *
      * @param speed
      */
-    // TODO fix this method according to lab pm
     public void gas(double speed) {
-        incrementSpeed(capSpeed(speed));
+        increaseSpeed(Maths.clamp(speed, 0.0, 1.0));
     }
 
     /**
@@ -121,38 +88,7 @@ public abstract class Car implements Movable {
      *
      * @param
      */
-    // TODO fix this method according to lab pm
     public void brake(double speed) {
-        decrementSpeed(capSpeed(speed));
-    }
-
-    public static double capSpeed(double speed) {
-        return Math.min(1, Math.max(speed, 0));
-    }
-
-    /**
-     * Changes the car's x,y coordinates based on its current speed and angle
-     */
-    @Override
-    public void move() {
-        xCoordinate = Math.cos(Math.toRadians(rotation)) * getCurrentSpeed();
-        yCoordinate = Math.sin(Math.toRadians(rotation)) * getCurrentSpeed();
-    }
-
-    /**
-     * Changes the car's direction by 10 degrees positive
-     */
-    @Override
-    public void turnLeft() {
-        rotation = rotate(10);
-    }
-
-    /**
-     * Changes the car direction by 10 degrees negative
-     */
-    @Override
-    public void turnRight() {
-        rotation = rotate(-10);
-
+        decreaseSpeed(Maths.clamp(speed, 0.0, 1.0));
     }
 }
