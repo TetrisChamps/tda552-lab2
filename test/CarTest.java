@@ -13,7 +13,6 @@ class CarTest {
     @BeforeEach
     void setUp() {
         car = new Saab95();
-        car.startEngine();
     }
 
     @AfterEach
@@ -50,7 +49,7 @@ class CarTest {
     @Test
     void startEngine() {
         car.startEngine();
-        assertEquals(true, car.getEngineOn());
+        assertEquals(0.1, car.getCurrentSpeed());
     }
 
     @Test
@@ -71,7 +70,7 @@ class CarTest {
         car.gas(1);
         car.turnLeft();
         car.move();
-        assertEquals(1.23, (double) Math.round(car.getXCoordinate() * 100.0) / 100.0);
+        assertEquals(1.23, (double) Math.round(car.getxCordinate() * 100.0) / 100.0);
     }
 
     @Test
@@ -79,7 +78,7 @@ class CarTest {
         car.gas(1);
         car.turnLeft();
         car.move();
-        assertEquals(0.22, (double) Math.round(car.getYCoordinate() * 100.0) / 100.0);
+        assertEquals(0.22, (double) Math.round(car.getyCordinate() * 100.0) / 100.0);
     }
 
     @Test
@@ -96,11 +95,11 @@ class CarTest {
 
     @Test
     void getxCordinate(){
-        assertEquals(0, car.getXCoordinate());
+        assertEquals(0, car.getxCordinate());
     }
 
     @Test
     void getyCordinate(){
-        assertEquals(0, car.getYCoordinate());
+        assertEquals(0, car.getyCordinate());
     }
 }

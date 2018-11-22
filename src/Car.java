@@ -1,6 +1,8 @@
 import java.awt.*;
 
-
+/**
+ * A representation of an abstract car that is movable.
+ */
 public abstract class Car implements Movable {
 
     private int nrDoors; // Number of doors on the car
@@ -129,7 +131,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Changes the car's x,y cordinates based on its current speed and angle
+     * Changes the car's x,y coordinates based on its current speed and angle
      */
     @Override
     public void move() {
