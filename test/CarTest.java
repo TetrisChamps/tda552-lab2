@@ -49,11 +49,12 @@ class CarTest {
     @Test
     void startEngine() {
         car.startEngine();
-        assertEquals(0.1, car.getCurrentSpeed());
+        assertEquals(0.0, car.getCurrentSpeed());
     }
 
     @Test
     void gas() {
+        car.startEngine();
         car.gas(1);
         assertEquals(1.25, car.getCurrentSpeed());
     }
@@ -67,18 +68,20 @@ class CarTest {
 
     @Test
     void moveX() {
+        car.startEngine();
         car.gas(1);
         car.turnLeft();
         car.move();
-        assertEquals(1.23, (double) Math.round(car.getxCordinate() * 100.0) / 100.0);
+        assertEquals(1.23, (double) Math.round(car.getXCoordinate() * 100.0) / 100.0);
     }
 
     @Test
     void moveY() {
+        car.startEngine();
         car.gas(1);
         car.turnLeft();
         car.move();
-        assertEquals(0.22, (double) Math.round(car.getyCordinate() * 100.0) / 100.0);
+        assertEquals(0.22, (double) Math.round(car.getYCoordinate() * 100.0) / 100.0);
     }
 
     @Test
@@ -94,12 +97,21 @@ class CarTest {
     }
 
     @Test
-    void getxCordinate(){
-        assertEquals(0, car.getxCordinate());
+    void getXCoordinate(){
+        assertEquals(0, car.getXCoordinate());
     }
 
     @Test
-    void getyCordinate(){
-        assertEquals(0, car.getyCordinate());
+    void getYCoordinate(){
+        assertEquals(0, car.getYCoordinate());
+    }
+
+    @Test
+    void capSpeed() { assertEquals(1, Car.capSpeed(2.0)); }
+
+    @Test
+    void getEngineOn() {
+        car.startEngine();
+        assertEquals(true, car.getEngineOn());
     }
 }

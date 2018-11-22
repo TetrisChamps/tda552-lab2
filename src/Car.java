@@ -126,7 +126,7 @@ public abstract class Car implements Movable {
         decrementSpeed(capSpeed(speed));
     }
 
-    private double capSpeed(double speed) {
+    public static double capSpeed(double speed) {
         return Math.min(1, Math.max(speed, 0));
     }
 
