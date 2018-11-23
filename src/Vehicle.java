@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A representation of a high level vehicle.
  */
-public class Vehicle implements IMovable {
+public abstract class Vehicle implements IMovable {
     private Color color; // Color of the vehicle
     private final String modelName; // The model name of the vehicle
     protected Movable movable; // The move behaviour of the vehicle

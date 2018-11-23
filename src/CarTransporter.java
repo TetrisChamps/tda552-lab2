@@ -1,59 +1,54 @@
-import java.util.LinkedList;
+import java.awt.*;
 
 /**
- * A class that can hold cars.
+ * A higher order representation of an abstract truck.
  */
-public class CarTransporter {
-    LinkedList<Car> cars = new LinkedList<>();
-    private int capacity;
+public class CarTransporter extends Car {
+    CarCarrier transporter = new CarCarrier(15);
+    private Ramp ramp = new Ramp();
 
     /**
-     *  Creates the CarTransporter object.
-     * @param capacity The amount of cars that the ferry can hold.
+     * Initiates a Truck, based on subclass parameters
+     *
      */
-    public CarTransporter(int capacity) {
-        this.capacity = capacity;
+    public CarTransporter() {
+        super(2, 437, Color.GRAY, "Car transporter AV");
     }
 
     /**
-     * Adds a car to the trailer if there is still enough room left and the ramp is down.
-     * @param car The car to be added.
-     * @param movable The Movable object from the carrier.
+     * Adds a car to the car trailer if the ramp is down.
+     *
+     * @param car
      */
-    public void addCar(Car car, Movable movable) {
-        if (cars.size() < capacity) {
-            if (!cars.contains(car)) {
-                cars.addLast(car);
-                car.stopEngine();
-                // Vi skulle kunna uppdatera bilarnas positioner genom att överskugga move-metoden
-                car.movable.setPosition(movable.getPosition());
-                return;
-            }
-            throw new IllegalStateException("Cannot add a car that is already being transported!");
+    public void addCar(Car car) {
+        if (ramp.isDown()) {
+            transporter.addCar(car, this);
         }
     }
 
     /**
-     * Removes the car specified by the first parameter. If the first parameter is true,
-     * then the first car in gets removed first, and if the first parameter is false, the
-     * last car in gets removed first.
-     * The removed car is set to the position of the carrier + 1 on the y axis.
-     * If there are no cars on the trailer null is returned.
-     * @param first Specifies whether the first or last car in gets removed first
-     * @param movable The movable object of the carrier.
-     * @return the removed car.
+     * Removes a car from the car trailer if the ramp is down
+     *
+     * @return
      */
-    public Car removeCar(boolean first, Movable movable) {
-        if (cars.size() > 0) {
-            Car car;
-            if (first) {
-                car = cars.removeFirst();
-            } else {
-                car = cars.removeLast();
-            }
-            car.movable.setPosition(new Vector(movable.getPosition().x, movable.getPosition().y + 1));
-            return car;
+    public Car removeCar() {
+        if (ramp.isDown()) {
+            return transporter.removeCar(false, this);
         }
         return null;
+    }
+
+    /**
+     * Lowers the ramp if the trailer is not moving.
+     */
+    public void raiseRamp() {
+        ramp.raise();
+    }
+
+    /**
+     * Highers the ramp, no cars can be added or removed.
+     */
+    public void lowerRamp() {
+        ramp.lower();
     }
 }

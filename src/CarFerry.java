@@ -7,7 +7,7 @@ import java.awt.*;
 public class CarFerry extends Vehicle implements ICarTransporter {
 
     private boolean inDock;
-    private CarTransporter transporter;
+    private CarCarrier transporter;
 
     /**
      * Initiates an instances of a CarFerry
@@ -19,7 +19,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
      */
     public CarFerry(Color color, String modelName, int capacity, double x, double y) {
         super(color, modelName, x, y);
-        transporter = new CarTransporter(capacity);
+        transporter = new CarCarrier(capacity);
     }
 
     /**
@@ -29,7 +29,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     @Override
     public void addCar(Car car) {
         if(inDock){
-            transporter.addCar(car, movable);
+            transporter.addCar(car, this);
         }else{
             throw new IllegalStateException("The ferry is not in a harbour");
         }
@@ -44,7 +44,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     public Car removeCar() {
         Car car;
         if(inDock){
-            car = transporter.removeCar(true, movable);
+            car = transporter.removeCar(true, this);
         }
         return null;
     }

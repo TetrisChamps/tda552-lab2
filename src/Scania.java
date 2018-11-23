@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A representation of a Scania truck.
  */
-public class Scania extends Truck {
+public class Scania extends Car {
     private int boardAngle = 0;
 
     /**
