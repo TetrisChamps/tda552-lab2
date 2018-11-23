@@ -18,7 +18,7 @@ public abstract class Car extends Vehicle {
      * @param modelName   The model of the car, the cars model.
      */
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
-        super(color, modelName);
+        super(color, modelName, 0, 0);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         stopEngine();
@@ -46,7 +46,7 @@ public abstract class Car extends Vehicle {
     /**
      * Turns off the engine
      */
-    private void stopEngine() {
+    public void stopEngine() {
         engineOn = false;
     }
 
@@ -62,16 +62,14 @@ public abstract class Car extends Vehicle {
     private void increaseSpeed(double amount) {
         if (engineOn) {
             movable.increaseSpeed(speedFactor() * amount);
-            super.increaseSpeed(speedFactor() * amount);
-            if (getSpeed() > getEnginePower()) {
-                super.decreaseSpeed(getSpeed() - getEnginePower());
+            if (movable.getSpeed() > getEnginePower()) {
+                movable.setSpeed(getEnginePower());
             }
         }
     }
 
     private void decreaseSpeed(double amount) {
         movable.decreaseSpeed(speedFactor() * amount);
-        super.decreaseSpeed(speedFactor() * amount);
     }
 
     /**

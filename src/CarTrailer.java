@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Stack;
 
 public class CarTrailer extends Trailer {
     private boolean rampDown;
@@ -6,43 +6,64 @@ public class CarTrailer extends Trailer {
 
     private Stack<Car> cars = new Stack<>();
 
-    public CarTrailer(Truck truck, int capacity) {
-        super(truck);
+    public CarTrailer(int capacity, double x, double y) {
+        super(x, y);
         this.capacity = capacity;
     }
 
     public CarTrailer(int capacity) {
-        this(null, capacity);
+        this(capacity, 0, 0);
     }
 
-    void lowerRamp() {
+    /**
+     * Lowers the ramp if the trailer is not moving.
+     */
+    public void lowerRamp() {
         if (getTruck() == null) {
             return;
         }
-        if (getTruck().getCurrentSpeed() == 0) {
+        if (getTruck().movable.getSpeed() == 0) {
             rampDown = true;
         }
     }
 
-    void liftRamp() {
+    /**
+     * Highers the ramp, no cars can be added or removed.
+     */
+    public void liftRamp() {
         rampDown = false;
     }
 
-    void addCar(Car car) {
+    /**
+     * Adds a car to the trailer if there is still enough room left and the ramp is down.
+     *
+     * @param car
+     */
+    public void addCar(Car car) {
         if (getTruck() == car) {
             return;
         }
-        if(rampDown && cars.size() < capacity){
+        if (rampDown && cars.size() < capacity) {
             if (cars.indexOf(car) < 0) {
                 cars.push(car);
+                car.stopEngine();
+                // Vi skulle kunna uppdatera bilarnas positioner genom att överskugga move-metoden
+                car.movable.setPosition(this.movable.getPosition());
             }
         }
     }
 
-    Car removeCar(){
-        if(!cars.empty() && rampDown){
-            //TODO: set car location near trailer
-            return cars.pop();
+    /**
+     * Removes the last car added (last in first out) to the trailer, if the ramp is down.
+     * If there are no cars on the trailer null is returned.
+     *
+     * @return Car removedCar
+     */
+    public Car removeCar() {
+        if (!cars.empty() && rampDown) {
+            Car car = cars.pop();
+            car.movable.setPosition(new Vector(this.movable.getPosition().x, this.movable.getPosition().y + 1));
+            return car;
         }
         return null;
     }

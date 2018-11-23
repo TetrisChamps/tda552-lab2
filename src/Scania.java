@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A representation of a Scania truck.
  */
-public class Scania extends Car {
+public class Scania extends Truck {
     private int boardAngle = 0;
 
     /**
@@ -17,7 +17,7 @@ public class Scania extends Car {
      * Raises the board of the truck, if the truck is not moving.
      */
     public void raiseBoard() {
-        if (getCurrentSpeed() == 0){
+        if (this.movable.getSpeed() == 0){
             boardAngle += 5;
             // Limits the board to a maximum angle of 70.
             boardAngle = Math.min(boardAngle, 70);
@@ -28,7 +28,7 @@ public class Scania extends Car {
      *  Lowers the board of the truck, if the truck is not moving.
      */
     public void lowerBoard() {
-        if (getCurrentSpeed() == 0) {
+        if (this.movable.getSpeed() == 0) {
             boardAngle -= 5;
             boardAngle = Math.max(boardAngle, 0);
         }

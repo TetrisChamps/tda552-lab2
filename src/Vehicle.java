@@ -3,7 +3,7 @@ import java.awt.*;
 public class Vehicle implements IMovable {
     private Color color; // Color of the car
     private final String modelName; // The car model name
-    private Movable movable;
+    protected Movable movable;
     public Vehicle(Color color, String modelName, double x, double y) {
         this.color = color;
         this.modelName = modelName;

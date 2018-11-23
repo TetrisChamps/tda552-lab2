@@ -1,8 +1,9 @@
-public abstract class Trailer {
+public class Trailer implements IMovable {
     private Truck truck;
+    protected Movable movable;
 
-    public Trailer(Truck truck) {
-        this.truck = truck;
+    public Trailer(double x, double y) {
+        movable = new Movable(x, y);
     }
 
     public Truck getTruck() {
@@ -11,5 +12,22 @@ public abstract class Trailer {
 
     public void setTruck(Truck truck) {
         this.truck = truck;
+    }
+
+    @Override
+    public void move() {
+        this.movable.move();
+        //this.movable.setSpeed(truck.movable.getSpeed());
+        //this.movable.setRotation(truck.movable.getRotation());
+    }
+
+    @Override
+    public void turnLeft() {
+        this.movable.rotate(10);
+    }
+
+    @Override
+    public void turnRight() {
+        this.movable.rotate(-10);
     }
 }
