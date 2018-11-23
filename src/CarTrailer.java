@@ -1,14 +1,12 @@
 import java.util.Stack;
 
-public class CarTrailer extends Trailer {
+public class CarTrailer extends Trailer implements ICarTransporter {
     private boolean rampDown;
-    private int capacity;
-
-    private Stack<Car> cars = new Stack<>();
+    private CarTransporter transporter;
 
     public CarTrailer(int capacity, double x, double y) {
         super(x, y);
-        this.capacity = capacity;
+        this.transporter = new CarTransporter(capacity);
     }
 
     public CarTrailer(int capacity) {
@@ -34,36 +32,15 @@ public class CarTrailer extends Trailer {
         rampDown = false;
     }
 
-    /**
-     * Adds a car to the trailer if there is still enough room left and the ramp is down.
-     *
-     * @param car
-     */
     public void addCar(Car car) {
-        if (getTruck() == car) {
-            return;
-        }
-        if (rampDown && cars.size() < capacity) {
-            if (cars.indexOf(car) < 0) {
-                cars.push(car);
-                car.stopEngine();
-                // Vi skulle kunna uppdatera bilarnas positioner genom att överskugga move-metoden
-                car.movable.setPosition(this.movable.getPosition());
-            }
+        if (rampDown) {
+            transporter.addCar(car, movable);
         }
     }
 
-    /**
-     * Removes the last car added (last in first out) to the trailer, if the ramp is down.
-     * If there are no cars on the trailer null is returned.
-     *
-     * @return Car removedCar
-     */
     public Car removeCar() {
-        if (!cars.empty() && rampDown) {
-            Car car = cars.pop();
-            car.movable.setPosition(new Vector(this.movable.getPosition().x, this.movable.getPosition().y + 1));
-            return car;
+        if (rampDown) {
+            return transporter.removeCar(false, movable);
         }
         return null;
     }
