@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+ * A higher order representation of an abstract truck.
+ */
 public abstract class Truck extends Car {
 
     private Trailer trailer;
@@ -16,18 +19,28 @@ public abstract class Truck extends Car {
         super(nrDoors, enginePower, color, modelName);
     }
 
-
-    public void attatchTrailer(Trailer trailer) {
+    /**
+     * Binds a trailer to the truck
+     * @param trailer the trailer to be attached.
+     */
+    public void attachTrailer(Trailer trailer) {
+        // Check if the truck already has a truck attached.
         if (this.trailer != null && trailer.getTruck() != this) {
             throw new IllegalStateException("Truck already has a trailer attached!");
         }
+        // Check if the trailer is attached to another truck.
         if (trailer.getTruck() != null && trailer.getTruck() != this) {
             throw new IllegalStateException("Trailer is already attached to another truck");
         }
+
         this.trailer = trailer;
         this.trailer.setTruck(this);
     }
 
+    /**
+     * Detaches the attached trailer, if the trailer exists.
+     * @return the detached trailer.
+     */
     public Trailer detachTrailer() {
         if (this.trailer == null) {
             throw new IllegalStateException("Cannot detach non-existing trailer!");
@@ -54,6 +67,7 @@ public abstract class Truck extends Car {
         }
     }
 
+    @Override
     public void turnRight() {
         super.turnRight();
         if (trailer != null) {
@@ -61,11 +75,11 @@ public abstract class Truck extends Car {
         }
     }
 
+    @Override
     public void gas(double amount) {
         super.gas(amount);
         if (trailer != null) {
             trailer.movable.setSpeed(this.movable.getSpeed());
         }
     }
-    //TODO: Make cars on trailer not able to gas.
 }

@@ -6,8 +6,8 @@ public class Main {
         CarTrailer t2 = new CarTrailer(15, 0, 0);
         Car c1 = new Saab95();
         Car c2 = new Volvo240();
-        truck.attatchTrailer(t1);
-        truck.attatchTrailer(t2);
-        truck2.attatchTrailer(t1);
+        truck.attachTrailer(t1);
+        truck.attachTrailer(t2);
+        truck2.attachTrailer(t1);
     }
 }
