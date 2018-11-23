@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /**
- * A representation of an abstract car that is movable.
+ * A wheeled motor-driven vehicle
  */
 public abstract class Car extends Vehicle {
 
@@ -10,7 +10,7 @@ public abstract class Car extends Vehicle {
     private boolean engineOn = false;
 
     /**
-     * Initiates a car, based on subclass parameters
+     * Initiates a car, based on certain physical attributes.
      *
      * @param nrDoors     number of doors
      * @param enginePower The power of the engine
@@ -24,14 +24,26 @@ public abstract class Car extends Vehicle {
         stopEngine();
     }
 
+    /**
+     * Returns how many doors the car has
+     * @return int
+     */
     public int getNrDoors() {
         return nrDoors;
     }
 
+    /**
+     * Returns the engine power in terms of horse power.
+     * @return double
+     */
     public double getEnginePower() {
         return enginePower;
     }
 
+    /**
+     * Returns the state of the engine, either on or off.
+     * @return boolean
+     */
     public boolean getEngineOn() {
         return engineOn;
     }
@@ -59,6 +71,10 @@ public abstract class Car extends Vehicle {
         return 1.0;
     }
 
+    /**
+     * Increases the speed of the car
+     * @param amount
+     */
     private void increaseSpeed(double amount) {
         if (engineOn) {
             movable.increaseSpeed(speedFactor() * amount);
@@ -68,6 +84,10 @@ public abstract class Car extends Vehicle {
         }
     }
 
+    /**
+     * Decreases the speed of the car.
+     * @param amount
+     */
     private void decreaseSpeed(double amount) {
         movable.decreaseSpeed(speedFactor() * amount);
     }
@@ -75,18 +95,18 @@ public abstract class Car extends Vehicle {
     /**
      * Applies the throttle between 0-1
      *
-     * @param speed
+     * @param amount
      */
-    public void gas(double speed) {
-        increaseSpeed(Maths.clamp(speed, 0.0, 1.0));
+    public void gas(double amount) {
+        increaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
 
     /**
-     * Presses down the break lever machine stick by a factor of 0-1
+     * Presses down the brake by a factor of 0-1
      *
-     * @param
+     * @param amount
      */
-    public void brake(double speed) {
-        decreaseSpeed(Maths.clamp(speed, 0.0, 1.0));
+    public void brake(double amount) {
+        decreaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
 }

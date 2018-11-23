@@ -1,8 +1,11 @@
 import java.util.Stack;
 
+/**
+ * A trailer that carries cars.
+ */
 public class CarTrailer extends Trailer implements ICarTransporter {
-    private boolean rampDown;
-    private CarTransporter transporter;
+    private boolean rampDown; // Holds the state of the ramp
+    private CarTransporter transporter; // The car transportation behaviour
 
     public CarTrailer(int capacity, double x, double y) {
         super(x, y);
@@ -17,10 +20,7 @@ public class CarTrailer extends Trailer implements ICarTransporter {
      * Lowers the ramp if the trailer is not moving.
      */
     public void lowerRamp() {
-        if (getTruck() == null) {
-            return;
-        }
-        if (getTruck().movable.getSpeed() == 0) {
+        if (movable.getSpeed() == 0) {
             rampDown = true;
         }
     }
@@ -32,12 +32,20 @@ public class CarTrailer extends Trailer implements ICarTransporter {
         rampDown = false;
     }
 
+    /**
+     * Adds a car to the car trailer if the ramp is down.
+     * @param car
+     */
     public void addCar(Car car) {
         if (rampDown) {
             transporter.addCar(car, movable);
         }
     }
 
+    /**
+     * Removes a car from the car trailer if the ramp is down
+     * @return
+     */
     public Car removeCar() {
         if (rampDown) {
             return transporter.removeCar(false, movable);
