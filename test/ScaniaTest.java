@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScaniaTest {
-
     Scania scania;
 
     @BeforeEach
@@ -24,13 +23,13 @@ class ScaniaTest {
         scania.raiseBoard();
         scania.raiseBoard();
         scania.raiseBoard();
-        assertEquals(scania.getBoardAngle(), 15);
+        assertEquals(scania.getBoardAngle(), 30);
     }
 
     @Test
     void lowerBoard() {
         scania.raiseBoard();
-        assertEquals(scania.getBoardAngle(), 5);
+        assertEquals(scania.getBoardAngle(), 10);
         scania.lowerBoard();
         assertEquals(scania.getBoardAngle(), 0);
         scania.lowerBoard();
@@ -43,7 +42,7 @@ class ScaniaTest {
         scania.raiseBoard();
         scania.raiseBoard();
         scania.raiseBoard();
-        assertEquals(scania.getBoardAngle(), 20);
+        assertEquals(scania.getBoardAngle(), 40);
     }
 
     @Test
@@ -55,5 +54,10 @@ class ScaniaTest {
         scania.lowerBoard();
         scania.gas(1);
         assertNotEquals(scania.getSpeed(), 0);
+    }
+
+    @Test
+    void speedFactor() {
+        assertEquals(scania.speedFactor(), 4);
     }
 }
