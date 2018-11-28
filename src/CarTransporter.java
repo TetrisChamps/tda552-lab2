@@ -4,7 +4,7 @@ import java.awt.*;
  * A higher order representation of an abstract truck.
  */
 public class CarTransporter extends Car {
-    CarCarrier transporter = new CarCarrier(15);
+    private CarCarrier transporter = new CarCarrier(15);
     private Ramp ramp = new Ramp();
 
     /**

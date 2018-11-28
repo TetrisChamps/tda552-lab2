@@ -59,22 +59,6 @@ public class Movable {
     }
 
     /**
-     * Returns the rotation of the object
-     * @return
-     */
-    public double getRotation() {
-        return rotation;
-    }
-
-    /**
-     * Sets the rotation of the object in degrees
-     * @param rotation
-     */
-    public void setRotation(double rotation) {
-        this.rotation = rotation;
-    }
-
-    /**
      * Returns the position of the object as a Vector reference
      * @return
      */
