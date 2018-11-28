@@ -4,35 +4,36 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BoardTest {
-    private Board board;
+class RampTest {
+    Ramp ramp;
 
     @BeforeEach
     void setUp() {
-        board = new Board();
+        ramp = new Ramp();
     }
 
     @AfterEach
     void tearDown() {
-        board = null;
+        ramp = null;
     }
 
     @Test
     void raise() {
-        board.raise();
-        assertEquals(10, board.getAngle());
+        ramp.raise();
+        assertEquals(ramp.getAngle(), 90);
     }
 
     @Test
     void lower() {
-        board.raise();
-        board.raise();
-        board.lower();
-        assertEquals(10, board.getAngle());
+        ramp.lower();
+        assertEquals(ramp.getAngle(), 0);
     }
 
     @Test
     void isDown() {
-        assertTrue(board.isDown());
+        ramp.raise();
+        assertEquals(ramp.isDown(), false);
+        ramp.lower();
+        assertEquals(ramp.isDown(), true);
     }
 }
