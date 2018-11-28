@@ -4,7 +4,7 @@ import java.awt.*;
  * A representation of a Scania truck.
  */
 public class Scania extends Car {
-    private Ramp ramp = new Ramp();
+    private Board board = new Board();
 
     /**
      * Creates a normal Scania truck.
@@ -18,7 +18,7 @@ public class Scania extends Car {
      */
     public void raiseBoard() {
         if (getSpeed() == 0) {
-            ramp.raise();
+            board.raise();
         }
     }
 
@@ -27,7 +27,7 @@ public class Scania extends Car {
      */
     public void lowerBoard() {
         if (getSpeed() == 0) {
-            ramp.lower();
+            board.lower();
         }
     }
 
@@ -39,7 +39,7 @@ public class Scania extends Car {
      */
     @Override
     public void gas(double speed) {
-        if (!ramp.isDown()) {
+        if (!board.isDown()) {
             super.gas(speed);
         }
     }
@@ -52,5 +52,13 @@ public class Scania extends Car {
     @Override
     public double speedFactor() {
         return maxSpeed() * 0.01;
+    }
+
+    /**
+     *
+     * @return
+     */
+    int getBoardAngle(){
+        return board.getAngle();
     }
 }
