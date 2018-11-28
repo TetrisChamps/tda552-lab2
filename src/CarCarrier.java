@@ -4,7 +4,7 @@ import java.util.LinkedList;
  * A class that can hold cars.
  */
 public class CarCarrier {
-    LinkedList<Car> cars = new LinkedList<>();
+    private LinkedList<Car> cars = new LinkedList<>();
     private int capacity;
 
     public void move(double newX, double newY){
@@ -32,6 +32,7 @@ public class CarCarrier {
         if (vehicle == car) {
             throw new IllegalArgumentException("Cannot add itself to the transport carrier");
         }
+        // TODO: dont allow cars above a certain weight to be added
         if (cars.size() < capacity) {
             if (!cars.contains(car)) {
                 cars.addLast(car);
