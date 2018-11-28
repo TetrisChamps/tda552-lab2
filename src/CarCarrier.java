@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A class that can hold cars.
@@ -79,5 +80,13 @@ public class CarCarrier {
             car.unload();
         }
         return car;
+    }
+
+    /**
+     * returns the list of cars
+     * @return list of carried cars
+     */
+    public List<Car> getCars() {
+        return cars;
     }
 }
