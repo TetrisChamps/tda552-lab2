@@ -12,7 +12,7 @@ public class Saab95 extends Car {
      * Initiates a standard Saab95
      */
     public Saab95() {
-        super(2, 125, Color.red, "Saab95");
+        super(2, 125, Color.red, "Saab95", 0, 0, 1500);
         setTurboOff();
     }
 
