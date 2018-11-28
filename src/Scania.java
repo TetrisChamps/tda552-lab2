@@ -10,7 +10,7 @@ public class Scania extends Car {
      * Creates a normal Scania truck.
      */
     public Scania() {
-        super(2, 400, Color.RED, "Scania");
+        super(2, 400, Color.RED, "Scania", 0, 0, 5000);
     }
 
     /**
