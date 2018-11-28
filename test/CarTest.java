@@ -51,7 +51,8 @@ class CarTest {
 
     @Test
     void speedFactor() {
-        assertEquals(1.25, car.speedFactor());
+        car = new Scania();
+        assertEquals(4.0, car.speedFactor());
     }
 
     @Test
