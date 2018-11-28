@@ -1,3 +1,7 @@
+package storage;
+
+import storage.Vector;
+
 /**
  * Represents the behaviour of an object that can be moved around in a 2D world.
  */
@@ -75,7 +79,7 @@ public class Movable {
     }
 
     /**
-     * Returns the position of the object as a Vector reference
+     * Returns the position of the object as a storage.Vector reference
      * @return
      */
     public Vector getPosition() {

@@ -3,8 +3,8 @@ import java.awt.*;
 /**
  * A higher order representation of an abstract truck.
  */
-public class CarTransporter extends Car {
-    CarCarrier transporter = new CarCarrier(15);
+public class CarTransporter extends Car implements  ICarTransporter{
+    private CarCarrier transporter = new CarCarrier(15);
     private Ramp ramp = new Ramp();
 
     /**
@@ -14,7 +14,6 @@ public class CarTransporter extends Car {
     public CarTransporter() {
         super(2, 437, Color.GRAY, "Car transporter AV");
     }
-
     /**
      * Adds a car to the car trailer if the ramp is down.
      *
@@ -27,11 +26,14 @@ public class CarTransporter extends Car {
     }
 
     /**
-     * Removes a car from the car trailer if the ramp is down
+     * Removes a car from the car trailer if the ramp is down,
+     * will return null if the ramp is down or if there are no cars
+     * to be removed
      *
      * @return
      */
-    public Car removeCar() {
+
+    public Car removeCar(){
         if (ramp.isDown()) {
             return transporter.removeCar(false, this);
         }
@@ -50,5 +52,10 @@ public class CarTransporter extends Car {
      */
     public void lowerRamp() {
         ramp.lower();
+    }
+
+    @Override
+    public double speedFactor() {
+        return maxSpeed() * 0.01;
     }
 }

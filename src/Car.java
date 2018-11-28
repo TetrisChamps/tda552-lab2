@@ -36,7 +36,7 @@ public abstract class Car extends Vehicle {
      * Returns the engine power in terms of horse power.
      * @return double
      */
-    public double getEnginePower() {
+    public double maxSpeed() {
         return enginePower;
     }
 
@@ -62,35 +62,6 @@ public abstract class Car extends Vehicle {
         engineOn = false;
     }
 
-    /**
-     * Gives the highest maximum speed change
-     *
-     * @return Max speed change
-     */
-    public double speedFactor() {
-        return 1.0;
-    }
-
-    /**
-     * Increases the speed of the car
-     * @param amount
-     */
-    private void increaseSpeed(double amount) {
-        if (engineOn) {
-            movable.increaseSpeed(speedFactor() * amount);
-            if (movable.getSpeed() > getEnginePower()) {
-                movable.setSpeed(getEnginePower());
-            }
-        }
-    }
-
-    /**
-     * Decreases the speed of the car.
-     * @param amount
-     */
-    private void decreaseSpeed(double amount) {
-        movable.decreaseSpeed(speedFactor() * amount);
-    }
 
     /**
      * Applies the throttle between 0-1
@@ -98,7 +69,13 @@ public abstract class Car extends Vehicle {
      * @param amount
      */
     public void gas(double amount) {
-        increaseSpeed(Maths.clamp(amount, 0.0, 1.0));
+        if(engineOn){
+            super.gas(amount);
+        }
+    }
+    @Override
+    public double speedFactor(){
+        return maxSpeed() * 0.01;
     }
 
     /**
@@ -107,6 +84,16 @@ public abstract class Car extends Vehicle {
      * @param amount
      */
     public void brake(double amount) {
-        decreaseSpeed(Maths.clamp(amount, 0.0, 1.0));
+        super.brake(amount);
+    }
+
+    @Override
+    public void turnLeft() {
+        rotateVehicle(10);
+    }
+
+    @Override
+    public void turnRight() {
+        rotateVehicle(-10);
     }
 }

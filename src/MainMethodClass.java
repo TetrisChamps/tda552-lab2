@@ -1,4 +1,4 @@
-public class Main {
+public class MainMethodClass {
     public static void main(String[] args) {
         Scania truck = new Scania();
         Scania truck2 = new Scania();

@@ -27,7 +27,7 @@ class CarTest {
 
     @Test
     void getEnginePower() {
-        assertEquals(125, car.getEnginePower());
+        assertEquals(125, car.maxSpeed());
     }
 
     @Test

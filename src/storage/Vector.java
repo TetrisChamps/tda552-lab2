@@ -1,3 +1,5 @@
+package storage;
+
 /**
  * A mathematical representation of a two dimensional vector.
  */
@@ -71,14 +73,14 @@ public class Vector {
      */
     public double rotation() {
         if (magnitude() == 0.0) {
-            throw new IllegalArgumentException("Cannot rotate a vector with magnitude 0");
+            throw new IllegalArgumentException("Cannot applyDeltaToAngle a vector with magnitude 0");
         }
         return Math.acos(x / magnitude());
     }
 
     /**
      * Rotates a vector
-     * @param angle the angle to rotate with.
+     * @param angle the angle to applyDeltaToAngle with.
      */
     public void rotate(int angle) {
         double rotation = rotation();
