@@ -42,6 +42,8 @@ class CarTransporterTest {
         int amountOfLoadedCars = carTransporter.getNumberOfCars();
         assertEquals(carTransporter.removeCar(), volvo240, "The unloaded car is not the same as the loaded");
         assertEquals(amountOfLoadedCars - 1, carTransporter.getNumberOfCars(), "A car was not unloaded");
+        carTransporter.raiseRamp();
+        assertNull(carTransporter.removeCar());
     }
 
     @Test
