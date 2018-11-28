@@ -19,7 +19,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
      */
     public CarFerry(double x, double y) {
         super(Color.RED, "Car Ferry 101", x, y, 30000000);
-        this.enginePower = 30;
+        this.enginePower = 3000;
         transporter = new CarCarrier(300, 2000);
     }
 
@@ -77,7 +77,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
 
     @Override
     public double maxSpeed() {
-        return enginePower;
+        return enginePower * 0.01;
     }
 
     @Override
@@ -92,5 +92,9 @@ public class CarFerry extends Vehicle implements ICarTransporter {
 
     public List<Car> getCars(){
         return transporter.getCars();
+    }
+
+    public boolean docked(){
+        return inDock;
     }
 }
