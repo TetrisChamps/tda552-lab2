@@ -9,12 +9,13 @@ class CarTransporterTest {
     CarTransporter carTransporter;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         carTransporter = new CarTransporter();
 
     }
+
     @AfterEach
-    void TearDown(){
+    void TearDown() {
         carTransporter = null;
     }
 
@@ -28,6 +29,9 @@ class CarTransporterTest {
 
         assertEquals(amountOfLoadedCars + 1, carTransporter.getNumberOfCars(), "Car was not loaded");
         assertEquals(carTransporter.removeCar(), volvo240, "The unloaded car is not the same as the loaded");
+
+        carTransporter.raiseRamp();
+        assertThrows(IllegalStateException.class, () -> carTransporter.addCar(volvo240));
     }
 
     @Test
@@ -37,11 +41,11 @@ class CarTransporterTest {
         carTransporter.addCar(volvo240);
         int amountOfLoadedCars = carTransporter.getNumberOfCars();
         assertEquals(carTransporter.removeCar(), volvo240, "The unloaded car is not the same as the loaded");
-        assertEquals(amountOfLoadedCars -1 , carTransporter.getNumberOfCars(), "A car was not unloaded");
+        assertEquals(amountOfLoadedCars - 1, carTransporter.getNumberOfCars(), "A car was not unloaded");
     }
 
     @Test
-    public void isRampDown(){
+    public void isRampDown() {
         carTransporter.raiseRamp();
         assertEquals(carTransporter.isRampDown(), false, "Raised ramp is down");
         carTransporter.lowerRamp();
@@ -63,7 +67,7 @@ class CarTransporterTest {
 
     @Test
     void speedFactor() {
-        assertEquals(carTransporter.speedFactor(), carTransporter.maxSpeed() * 0.01,  "speedFactor is not accurate");
+        assertEquals(carTransporter.speedFactor(), carTransporter.maxSpeed() * 0.01, "speedFactor is not accurate");
     }
 
 }
