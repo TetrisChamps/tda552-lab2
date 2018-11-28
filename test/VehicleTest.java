@@ -2,6 +2,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleTest {
@@ -30,11 +32,19 @@ class VehicleTest {
 
     @Test
     void getColor() {
-        
+        assertEquals(Color.BLACK, vehicle.getColor());
     }
 
     @Test
     void move() {
+        vehicle.move();
+        assertEquals(0, vehicle.getX());
+        assertEquals(0, vehicle.getY());
+        ((Volvo240) vehicle).startEngine();
+        vehicle.gas(1);
+        vehicle.move();
+        assertEquals(1.25, vehicle.getX());
+        assertEquals(0, vehicle.getY());
     }
 
     @Test
