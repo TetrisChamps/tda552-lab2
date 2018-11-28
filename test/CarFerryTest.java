@@ -12,7 +12,7 @@ class CarFerryTest {
 
     @BeforeEach
     void setUp() {
-        carFerry = new CarFerry(Color.BLUE, "ferry1",10, 5, 7);
+        carFerry = new CarFerry(0, 0);
     }
 
     @AfterEach

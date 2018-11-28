@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.Color;
+import java.util.List;
 
 /**
  * A Ferry that transports cars
@@ -87,5 +88,9 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     @Override
     public void turnRight() {
         super.rotateVehicle(-10);
+    }
+
+    public List<Car> getCars(){
+        return transporter.getCars();
     }
 }
