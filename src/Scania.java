@@ -39,7 +39,7 @@ public class Scania extends Car {
      */
     @Override
     public void gas(double speed) {
-        if (!board.isDown()) {
+        if (board.isDown()) {
             super.gas(speed);
         }
     }

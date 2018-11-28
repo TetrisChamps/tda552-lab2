@@ -67,7 +67,7 @@ public abstract class Car extends Vehicle {
      * @param amount
      */
     public void gas(double amount) {
-        if (engineOn && isLoaded()) {
+        if (engineOn && !isLoaded()) {
             super.gas(amount);
         }
     }
