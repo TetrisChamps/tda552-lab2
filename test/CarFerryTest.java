@@ -29,21 +29,8 @@ class CarFerryTest {
         } catch (Exception e) {
             assertEquals(true, true);
         }
-
         carFerry.dock();
         carFerry.addCar(car);
-        assertEquals(carFerry.getCars().size(), 1);
-
-        carFerry.unDock();
-        Car car1 = new Volvo240();
-
-        try {
-            carFerry.addCar(car1);
-            assertEquals(true, false);
-        }
-        catch(Exception e) {
-            assertEquals(true, true);
-        }
         assertEquals(carFerry.getCars().size(), 1);
     }
 
