@@ -45,16 +45,6 @@ public class Scania extends Car {
     }
 
     /**
-     * The truck has a speed factor of 1.
-     *
-     * @return the speed factor of the truck.
-     */
-    @Override
-    public double speedFactor() {
-        return maxSpeed() * 0.01;
-    }
-
-    /**
      *
      * @return
      */

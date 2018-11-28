@@ -7,6 +7,10 @@ public class CarTransporter extends Car implements  ICarTransporter{
     private CarCarrier transporter = new CarCarrier(15, 2000);
     private Ramp ramp = new Ramp();
 
+    protected int getNumberOfCars(){
+        return transporter.getCars().size();
+    }
+
     /**
      * Initiates a Truck, based on subclass parameters
      *
@@ -19,10 +23,13 @@ public class CarTransporter extends Car implements  ICarTransporter{
      *
      * @param car
      */
+
     public void addCar(Car car) {
         if (ramp.isDown()) {
             transporter.addCar(car, this);
+            return;
         }
+        throw new IllegalStateException();
     }
 
     /**
@@ -52,6 +59,14 @@ public class CarTransporter extends Car implements  ICarTransporter{
      */
     public void lowerRamp() {
         ramp.lower();
+    }
+
+    /**
+     * Returns true if ramp is down;
+     * @return
+     */
+    public final boolean isRampDown(){
+        return ramp.isDown();
     }
 
     @Override

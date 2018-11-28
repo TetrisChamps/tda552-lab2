@@ -87,6 +87,8 @@ public class CarCarrier {
      * @return list of carried cars
      */
     public List<Car> getCars() {
-        return cars;
+        System.out.println("Car size: " + cars.size());
+        System.out.println("Cloned car size" + (List<Car>)cars.clone() );
+        return (List<Car>)cars.clone();
     }
 }

@@ -45,7 +45,6 @@ class CarFerryTest {
             assertEquals(true, true);
         }
         assertEquals(carFerry.getCars().size(), 1);
-
     }
 
     @Test
