@@ -15,4 +15,10 @@ public class Ramp extends Board {
     public boolean isDown() {
         return !up;
     }
+
+    @Override
+    public int getAngle()
+    {
+        return up ? 90 : 0;
+    }
 }
