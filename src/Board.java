@@ -1,5 +1,5 @@
 public class Board {
-    private int angle;
+    private int angle = 0;
 
     public void raise() {
         angle = Math.min(70, angle + 10);
@@ -11,5 +11,13 @@ public class Board {
 
     public boolean isDown() {
         return angle == 0;
+    }
+
+    /**
+     * Returns the current angle of the board.
+     * @return the current angle of the board.
+     */
+    public int getAngle() {
+        return angle;
     }
 }

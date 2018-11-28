@@ -51,9 +51,9 @@ class ScaniaTest {
         scania.raiseBoard();
         scania.startEngine();
         scania.gas(1);
-        assertEquals(scania.getCurrentSpeed(), 0);
+        assertEquals(scania.getSpeed(), 0);
         scania.lowerBoard();
         scania.gas(1);
-        assertNotEquals(scania.getCurrentSpeed(), 0);
+        assertNotEquals(scania.getSpeed(), 0);
     }
 }
