@@ -5,34 +5,40 @@ import java.awt.*;
  */
 public abstract class Vehicle implements IMovable {
     private Color color; // Color of the vehicle
-
-    public String getModelName() {
-        return modelName;
-    }
-
+    private boolean loaded = false; // Whether the vehicle is loaded or not
     private final String modelName; // The model name of the vehicle
-    private double x;
-    private double y;
+    private double x; // The position on the x axis
+    private double y; // The position on the y axis
     private double rotation = 0.0; // The rotation of the object, in degrees
     private double speed = 0.0; // The speed of the object
+    final private int weight;
 
-
-
-    public Vehicle(Color color, String modelName, double x, double y) {
+    public Vehicle(Color color, String modelName, double x, double y, int weight) {
         this.color = color;
         this.modelName = modelName;
         this.x = x;
         this.y = y;
+        this.weight = weight;
     }
 
     public static double applyDeltaToAngle(double angle, double deltaAngle) {
-        angle =  (angle + deltaAngle)%360;
+        angle = (angle + deltaAngle) % 360;
         return (angle > 0) ? angle : 360 + angle;
 
     }
 
     /**
+     * Return the model name of the vehicle
+     *
+     * @return
+     */
+    public String getModelName() {
+        return modelName;
+    }
+
+    /**
      * Returns the colour of the vehicle
+     *
      * @return
      */
     public Color getColor() {
@@ -49,10 +55,9 @@ public abstract class Vehicle implements IMovable {
     }
 
 
-
-
     /**
      * This method returns the maximum speed increase of object.
+     *
      * @param
      */
     public abstract double speedFactor();
@@ -64,6 +69,7 @@ public abstract class Vehicle implements IMovable {
 
     /**
      * Decreses the speed by amount
+     *
      * @param amount
      */
     private void decreaseSpeed(double amount) {
@@ -73,20 +79,22 @@ public abstract class Vehicle implements IMovable {
 
     /**
      * Returns the speed of the object
+     *
      * @return
      */
 
-    public void gas(double amount){
+    public void gas(double amount) {
         increaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
 
-    public void brake(double amount){
+    public void brake(double amount) {
         decreaseSpeed(amount);
     }
 
     /**
      * This abstract method returns the maximum speed of an object in any direction. This must be overriden as
      * how a vehicle defines its maximum speed can vary greatly.
+     *
      * @return
      */
     //TODO rename this to something more fitting and abstract fitting Vehicles in general.
@@ -98,6 +106,7 @@ public abstract class Vehicle implements IMovable {
 
     /**
      * Returns the rotation of the object
+     *
      * @return
      */
     public double getRotation() {
@@ -106,7 +115,8 @@ public abstract class Vehicle implements IMovable {
 
     /**
      * Sets the rotation of the object in degrees
-     * @param rotation
+     *
+     * @param deltaAngle
      */
     public final void rotateVehicle(double deltaAngle) {
         this.rotation = applyDeltaToAngle(this.rotation, deltaAngle);
@@ -115,18 +125,45 @@ public abstract class Vehicle implements IMovable {
     public double getX() {
         return x;
     }
-    public double getY(){
+
+    public double getY() {
         return y;
     }
 
     /**
      * Sets the position of the object
+     *
      * @param
      */
-
     public void setPosition(double x, double y) {
         this.x = x;
         this.y = y;
+    }
 
+    /**
+     * Loads the vehicle
+     */
+    void load() {
+        loaded = true;
+    }
+
+    /**
+     * Unloads the vehicle
+     */
+    void unload() {
+        loaded = false;
+    }
+
+    /**
+     * Returns whether the vehicle is loaded or not
+     *
+     * @return
+     */
+    boolean isLoaded() {
+        return loaded;
+    }
+
+    int getWeight() {
+        return weight;
     }
 }

@@ -4,21 +4,17 @@ import java.awt.*;
  * A wheeled motor-driven vehicle
  */
 public abstract class Car extends Vehicle {
-    //TODO: boolean to check if loaded
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    private boolean engineOn = false;
+    private boolean engineOn = false; // Whether the engine is on or not
 
+    //TODO: add @params
     /**
      * Initiates a car, based on certain physical attributes.
      *
-     * @param nrDoors     number of doors
-     * @param enginePower The power of the engine
-     * @param color       The color of the Car
-     * @param modelName   The model of the car, the cars model.
      */
-    public Car(int nrDoors, double enginePower, Color color, String modelName) {
-        super(color, modelName, 0, 0);
+    public Car(int nrDoors, double enginePower, Color color, String modelName, int x, int y, int weight) {
+        super(color, modelName, x, y, weight);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         stopEngine();
@@ -26,6 +22,7 @@ public abstract class Car extends Vehicle {
 
     /**
      * Returns how many doors the car has
+     *
      * @return int
      */
     public int getNrDoors() {
@@ -34,6 +31,7 @@ public abstract class Car extends Vehicle {
 
     /**
      * Returns the engine power in terms of horse power.
+     *
      * @return double
      */
     public double maxSpeed() {
@@ -42,6 +40,7 @@ public abstract class Car extends Vehicle {
 
     /**
      * Returns the state of the engine, either on or off.
+     *
      * @return boolean
      */
     public boolean getEngineOn() {
@@ -62,19 +61,19 @@ public abstract class Car extends Vehicle {
         engineOn = false;
     }
 
-
     /**
      * Applies the throttle between 0-1
      *
      * @param amount
      */
     public void gas(double amount) {
-        if(engineOn){
+        if (engineOn && isLoaded()) {
             super.gas(amount);
         }
     }
+
     @Override
-    public double speedFactor(){
+    public double speedFactor() {
         return maxSpeed() * 0.01;
     }
 

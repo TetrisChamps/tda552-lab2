@@ -6,26 +6,29 @@ import java.util.LinkedList;
 public class CarCarrier {
     private LinkedList<Car> cars = new LinkedList<>();
     private int capacity;
+    private int maxWeight;
 
-    public void move(double newX, double newY){
-        for(Car car: cars){
+    public void move(double newX, double newY) {
+        for (Car car : cars) {
             car.setPosition(newX, newY);
         }
     }
 
     /**
-     *  Creates the CarCarrier object.
-     * @param capacity The amount of cars that the ferry can hold.
+     * Creates the CarCarrier object.
+     *
+     * @param capacity  The amount of cars that the ferry can hold.
+     * @param maxWeight The maximum weight for a car that can be carried
      */
-
-    public CarCarrier(int capacity) {
+    public CarCarrier(int capacity, int maxWeight) {
         this.capacity = capacity;
+        this.maxWeight = maxWeight;
     }
 
     /**
      * Adds a car to the trailer if there is still enough room left and the ramp is down.
-     * @param car The car to be added.
      *
+     * @param car The car to be added.
      */
     //TODO this could just return a boolean, perhaps its harder to test functionality then?
     public void addCar(Car car, Vehicle vehicle) {
@@ -35,11 +38,13 @@ public class CarCarrier {
         // TODO: dont allow cars above a certain weight to be added
         if (cars.size() < capacity) {
             if (!cars.contains(car)) {
-                cars.addLast(car);
-                car.stopEngine();
-                // Vi skulle kunna uppdatera bilarnas positioner genom att överskugga move-metoden
-                car.setPosition(vehicle.getX(), vehicle.getY());
-                return;
+                if (car.getWeight() < maxWeight) {
+                    cars.addLast(car);
+                    car.load();
+                    car.setPosition(vehicle.getX(), vehicle.getY());
+                    return;
+                }
+                throw new IllegalStateException("Car is too heavy");
             }
             throw new IllegalStateException("Cannot add a car that is already being transported!");
         }
@@ -52,6 +57,7 @@ public class CarCarrier {
      * last car in gets removed first.
      * The removed car is set to the position of the carrier + 1 on the y axis.
      * If there are no cars on the trailer null is returned.
+     *
      * @param first Specifies whether the first or last car in gets removed first
      * @return the removed car.
      */
