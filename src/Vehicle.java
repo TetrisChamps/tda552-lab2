@@ -17,7 +17,13 @@ public abstract class Vehicle implements IMovable {
     private double speed = 0.0; // The speed of the object
 
 
-
+    /**
+     * Standard constructor for making an abstract vehicle, must be called from subclass
+     * @param color
+     * @param modelName
+     * @param x Coordinate x
+     * @param y Coordinate y
+     */
     public Vehicle(Color color, String modelName, double x, double y) {
         this.color = color;
         this.modelName = modelName;
@@ -25,14 +31,22 @@ public abstract class Vehicle implements IMovable {
         this.y = y;
     }
 
+    /**
+     * Adds an angle to another and returns the new angle based on the unit circle
+     * @param angle Base angle
+     * @param deltaAngle Angle to be added to the base
+     * @return The resulting angle
+     */
+
     public static double applyDeltaToAngle(double angle, double deltaAngle) {
-        angle =  (angle + deltaAngle)%360;
+        angle = (angle + deltaAngle) % 360;
         return (angle > 0) ? angle : 360 + angle;
 
     }
 
     /**
      * Returns the colour of the vehicle
+     *
      * @return
      */
     public Color getColor() {
@@ -49,11 +63,10 @@ public abstract class Vehicle implements IMovable {
     }
 
 
-
-
     /**
-     * This method returns the maximum speed increase of object.
-     * @param
+     * Returns the maximum acceleration of the Vehicle.
+     *
+     * @return The increase in speed.
      */
     public abstract double speedFactor();
 
@@ -62,51 +75,60 @@ public abstract class Vehicle implements IMovable {
         speed = maxSpeed() >= newSpeed ? newSpeed : maxSpeed();
     }
 
-    /**
-     * Decreses the speed by amount
-     * @param amount
-     */
     private void decreaseSpeed(double amount) {
         double newSpeed = speed - speedFactor() * amount;
         speed = newSpeed > 0 ? newSpeed : 0;
     }
 
     /**
-     * Returns the speed of the object
+     * Increases the current speed, must be called from overridden subclasses
+     *
      * @return
      */
 
-    public void gas(double amount){
+
+    public void gas(double amount) {
         increaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
 
-    public void brake(double amount){
+    /**
+     * Decreases the speed of the vehicle, must be called from overriden methods.
+     * @param amount
+     */
+
+    public void brake(double amount) {
         decreaseSpeed(amount);
     }
 
     /**
      * This abstract method returns the maximum speed of an object in any direction. This must be overriden as
      * how a vehicle defines its maximum speed can vary greatly.
-     * @return
+     * @return maxSpeed
      */
-    //TODO rename this to something more fitting and abstract fitting Vehicles in general.
+
     public abstract double maxSpeed();
+
+    /**
+     * Returns the current speed of the vehicle
+     *
+     * @return Current speed
+     */
 
     public double getSpeed() {
         return speed;
     }
 
     /**
-     * Returns the rotation of the object
-     * @return
+     * Returns the rotation of the vehicle
+     * @return Current rotation
      */
+
     public double getRotation() {
         return rotation;
     }
 
     /**
      * Sets the rotation of the object in degrees
-     * @param rotation
      */
     public final void rotateVehicle(double deltaAngle) {
         this.rotation = applyDeltaToAngle(this.rotation, deltaAngle);
@@ -115,12 +137,13 @@ public abstract class Vehicle implements IMovable {
     public double getX() {
         return x;
     }
-    public double getY(){
+
+    public double getY() {
         return y;
     }
 
     /**
-     * Sets the position of the object
+     * Sets the x and y coordinates.
      * @param
      */
 

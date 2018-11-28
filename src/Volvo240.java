@@ -17,7 +17,10 @@ public class Volvo240 extends Car{
         super(4,100,Color.black,"Volvo240");
     }
 
-
+    /**
+     * Gets the Volvo240 maximum acceleration, is based of the maxSpeed and the trimFactor of the car
+     * @return Max acceleration
+     */
     public double speedFactor(){
         return maxSpeed() * 0.01 * trimFactor;
     }

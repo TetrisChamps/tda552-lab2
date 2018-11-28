@@ -73,6 +73,11 @@ public abstract class Car extends Vehicle {
             super.gas(amount);
         }
     }
+
+    /**
+     * A method returning the maximum acceleration of the Vehicle
+     * @return
+     */
     @Override
     public double speedFactor(){
         return maxSpeed() * 0.01;

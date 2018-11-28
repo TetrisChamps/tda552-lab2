@@ -61,7 +61,7 @@ public class Movable {
     public void setSpeed(double speed) {
         this.speed = speed;
     }
-    
+
     public Vector getPosition() {
         return position;
     }
