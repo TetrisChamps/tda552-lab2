@@ -1,3 +1,6 @@
+/**
+ * Representation of an adjustable board
+ */
 public class Board {
     private int angle; // The angle of the board, 0 = down
 

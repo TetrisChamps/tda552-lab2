@@ -8,9 +8,15 @@ public class CarCarrier {
     private int capacity;
     private int maxWeight;
 
-    public void move(double newX, double newY) {
+    /**
+     * Sets the position of all the loaded cars
+     *
+     * @param x
+     * @param y
+     */
+    public void move(double x, double y) {
         for (Car car : cars) {
-            car.setPosition(newX, newY);
+            car.setPosition(x, y);
         }
     }
 
@@ -61,7 +67,6 @@ public class CarCarrier {
      * @param first Specifies whether the first or last car in gets removed first
      * @return the removed car.
      */
-
     public Car removeCar(boolean first, Vehicle vehicle) {
         Car car = null;
         if (cars.size() > 0) {
@@ -71,6 +76,7 @@ public class CarCarrier {
                 car = cars.removeLast();
             }
             car.setPosition(vehicle.getX() + 1, vehicle.getY() + 1);
+            car.unload();
         }
         return car;
     }

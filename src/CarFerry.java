@@ -13,16 +13,13 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     /**
      * Initiates an instances of a CarFerry
      *
-     * @param color     The colour of the ferry
-     * @param modelName The modelname of the ferry
-     * @param capacity  The number of cars the ferry and take
-     * @param x         The start x coordinate of the ferry
-     * @param y         The start y coordinate
+     * @param x           The start x coordinate of the ferry
+     * @param y           The start y coordinate
      */
-    public CarFerry(Color color, String modelName, int capacity, double x, double y, double enginePower) {
-        super(color, modelName, x, y);
-        this.enginePower = enginePower;
-        transporter = new CarCarrier(capacity);
+    public CarFerry(double x, double y) {
+        super(Color.RED, "Car Ferry 101", x, y, 30000000);
+        this.enginePower = 30;
+        transporter = new CarCarrier(300, 2000);
     }
 
     /**
@@ -62,8 +59,6 @@ public class CarFerry extends Vehicle implements ICarTransporter {
             inDock = true;
         }
     }
-    //TODO check if the ferry is close to a harbour
-
 
     /**
      * Undocks the ferry, disables the ability to load cars

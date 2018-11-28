@@ -1,5 +1,5 @@
 public class Ramp extends Board {
-    private boolean up = true;
+    private boolean up = true; // Whether the board is up or down
 
     @Override
     public void raise() {
